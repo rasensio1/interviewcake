@@ -11,7 +11,6 @@ class Trie
     place = @data
 
     until split.empty?
-
       letter = split.shift
       
       if !place.key?(letter)
