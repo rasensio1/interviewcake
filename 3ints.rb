@@ -2,43 +2,41 @@
 
 #   The input list_of_ints will always have at least three integers.
 
-list = [1, 5, 7, 3, 56, 789, 25, 71]
-list = [-10, 9, 5, -2, 9, -10]
-list = [10, 9, -11, 10]
 
 #3 pos   OR 2neg 1Pos
 
-highest = list.first(3).reduce(:*)
+def highest_p_3(list)
+  highest = list.first(3).reduce(:*)
 
-running_pos =  list.first(2).reduce(:*)
-  # first_pos * previous high pos
-running_neg = list.first(2).reduce(:*)
-   # first_pos * first_neg
+  first_pos = list.first(2).max
+  sec_pos = list.first(2).min
+  first_neg = list.first(2).min
 
-first_pos = list.first(2).max
-first_neg = list.first(2).min
+  i = 2
+  while i < list.length do
+    c = list[i]
+    highest = [highest, c*first_pos*sec_pos , first_neg*first_pos*c].max
 
+    if c >= first_pos
+      sec_pos = first_pos
+      first_pos = c
+    end
 
-len = list.length
+    if c <= first_neg
+      first_neg = c
+    end
 
-i = 2
-while i < len do
-  curr = list[i]
-  highest = [highest, running_pos * curr, running_neg * curr].max
-
-  if curr >= first_pos
-    running_pos = curr * first_pos
-    first_pos = curr
+    i += 1
   end
 
-  if curr <= first_neg
-    running_neg = first_pos * curr
-    first_neg = curr
-  end
-
-  i += 1
+  highest
 end
 
-highest
+list = [10, 9, -11, 10]
+puts "should be 900"
+puts "output: #{highest_p_3(list)}"
 
-puts "output: #{highest}"
+list = [-10, 9, 5, -2, 9, -10]
+puts "should be 900"
+puts "output: #{highest_p_3(list)}"
+
