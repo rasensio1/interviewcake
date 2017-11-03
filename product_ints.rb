@@ -9,7 +9,6 @@ len = ints.size
 product_before_me = 1
 product_after_me = 1
 before_list = []
-done_list = []
 
 i=0
 while i < len
@@ -20,14 +19,13 @@ end
 
 puts "before list: #{ before_list}"
 
-i = len -1
+i -= 1
 while i >= 0
-  done_list[i] = before_list[i] * product_after_me
+  before_list[i] = before_list[i] * product_after_me
   product_after_me*= ints[i]
   i-=1
 end
 
-puts "after list #{after_list}"
-puts "done list #{done_list}"
+puts "done list #{before_list}"
 
 
